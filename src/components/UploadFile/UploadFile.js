@@ -1,77 +1,93 @@
-import React from 'react';
-import * as firebase from 'firebase';
+import React, { Component } from 'react';
+import './upload-file.scss';
+import firebase from '../firebase/firebase';
 
-//https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/
+class UploadFile extends Component {
 
-
-
-// Initialize Firebase
-/* var config = {
-    apiKey: "AIzaSyDO-fD1gnD34GMe9mxJ139l4MH_XQ63aL8",
-    authDomain: "gestion-clinica.firebaseapp.com",
-    databaseURL: "https://gestion-clinica.firebaseio.com",
-    projectId: "gestion-clinica",
-    storageBucket: "gestion-clinica.appspot.com",
-    timestampsInSnapshots: true,
-    messagingSenderId: "828448156766"
-};
-
-firebase.initializeApp(config);
-
-var storage = firebase.storage();
-var storageRef = storage.ref(); */
-
-
-// Create a child reference
-// imagesRef now points to 'images'
-
-/*
-form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    var file = document.querySelector("#uploadFile").files[0];
-
-    var uploadTask = storageRef.child('images/' + file.name).put(file);
-
-    // Register three observers:
-    // 1. 'state_changed' observer, called any time the state changes
-    // 2. Error observer, called on failure
-    // 3. Completion observer, called on successful completion
-    uploadTask.on('state_changed', function (snapshot) {
-        // Observe state change events such as progress, pause, and resume
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress.toFixed(2) + '% done');
-        switch (snapshot.state) {
-            case firebase.storage.TaskState.PAUSED: // or 'paused'
-                console.log('Upload is paused');
-                break;
-            case firebase.storage.TaskState.RUNNING: // or 'running'
-                console.log('Upload is running');
-                break;
+    constructor(props) {
+        super(props);
+        this.state = {
+            files: {}
         }
-    }, function (error) {
-        // Handle unsuccessful uploads
-    }, function () {
-        // Handle successful uploads on complete
-        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-            console.log('File available at', downloadURL);
+    }
+
+    _filesChoosen = (files) => {
+
+        let listFiles = {}; 
+
+        const file = {
+            src: undefined,
+            detail: {
+                progress: 0,
+                error: false,
+                success: false
+            }
+        }
+
+        Array.from(files).forEach( (e, i) => {
+            let f = { ...file, ...{src: e} }
+            listFiles[i] = f;
+        })
+
+        this.setState({
+            files: listFiles
         });
-    });
-}); */
+    }
 
-const submiteForm = (event) => {
-    event.preventDefault();
-    console.log('Estoy')
+    _submiteForm(event) {
+        event.preventDefault();
+        console.log('Estoy', this.state);
+        firebase.sendFiles(this.state.files, this._showProgress.bind(this));
+    }
+
+    _showProgress = (index, progress) => {
+        progress = progress.toFixed(2);
+        let newState = Object.assign({}, this.state.files);
+        newState[index].detail.progress = progress;
+
+        this.setState({ newState });
+        console.log('Upload is ' + progress + '% done'); 
+    }
+
+    _deleteFile(index) {
+        let newFiles = Object.assign({}, this.state.files);
+        delete newFiles[index];
+        this.setState({
+            files: newFiles        
+        })
+    }
+
+    render() {
+        console.log("progress", this.state.files)
+         return (
+            <div>
+                <form onSubmit={(e) => this._submiteForm(e)}>
+                    <input
+                        type="file"
+                        id="uploadFile"
+                        name="upload"
+                        multiple="multiple"
+                        onChange={e => this._filesChoosen(e.target.files)}
+                    />
+                    <input type="submit" />
+                </form>
+                <ul>
+                    { Object.keys(this.state.files).map((index) => {
+
+                        return (
+                            <li key={index} className="item-list-file">
+                                <span>{ this.state.files[index].src.name}</span>
+                                <span className="delete-file" onClick={ () => { this._deleteFile(index) } }>X</span>
+                                <div>
+                                    <span>Progress  {  this.state.files[index].detail.progress }</span>
+                                </div>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
+        );
+    }
 }
-
-const UploadFile = () => (
-    <div>
-        <form onSubmit={submiteForm}>
-            <input type="file" id="uploadFile" name="upload" multiple="multiple" />
-            <input type="submit" />
-        </form>
-    </div>
-);
 
 export default UploadFile; 

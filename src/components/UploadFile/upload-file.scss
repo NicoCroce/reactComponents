@@ -1,0 +1,17 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+ul {
+  margin-top: 50px;
+  li { 
+    list-style: none;
+    &.item-list-file { 
+      padding: 15px; border: 1px solid gainsboro; margin-bottom: 10px; border-radius: 3px;
+      display: inline-block; margin-left: 15px; font-size: 14px; cursor: pointer;
+      .delete-file { 
+        margin-left: 20px; background: #cc3a3a; color: white; line-height: 20px; width: 20px; display: inline-block; 
+        vertical-align: middle; border-radius: 50%; visibility: hidden; opacity: 0; transition: all .3s ease;
+      }
+      &:hover .delete-file { visibility: visible; opacity: 1; }
+    }
+  }
+}
