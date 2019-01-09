@@ -79,7 +79,8 @@ class UploadFile extends Component {
                                 <span>{ this.state.files[index].src.name}</span>
                                 <span className="delete-file" onClick={ () => { this._deleteFile(index) } }>X</span>
                                 <div>
-                                    <span>Progress  {  this.state.files[index].detail.progress }</span>
+                                    <p>Tamaño: { (this.state.files[index].src.size / 1000000).toFixed(2) } Mb.</p>
+                                    <span>Progress  {  this.state.files[index].detail.progress } %</span>
                                 </div>
                             </li>
                         );
