@@ -10,10 +10,11 @@ class UploadFile extends Component {
             filesDetails: []
         }
         this.files = {};
+        this.formRef = React.createRef();
     }
 
     _filesChoosen = (files) => {
-
+        console.log(files);
         let listFiles = [];
 
         const file = {
@@ -33,6 +34,7 @@ class UploadFile extends Component {
         this.setState({
             filesDetails: listFiles
         });
+        this.formRef.current.reset();
     }
 
     _submiteForm(event) {
@@ -66,18 +68,19 @@ class UploadFile extends Component {
     }
 
     _deleteFile(index) {
-        let newFiles = Object.assign({}, this.state.files);
-        delete newFiles[index];
+        delete this.files[index];
+        let newFiles = [...this.state.filesDetails]
+        newFiles.splice(index, 1);
         this.setState({
-            files: newFiles
-        })
+            filesDetails: newFiles
+        });
     }
 
     render() {
         console.log("progress", this.state.filesDetails);
         return (
             <div>
-                <form onSubmit={(e) => this._submiteForm(e)}>
+                <form onSubmit={(e) => this._submiteForm(e)} ref= { this.formRef }>
                     <input
                         type="file"
                         id="uploadFile"
@@ -89,18 +92,17 @@ class UploadFile extends Component {
                 </form>
                 <ul>
                     {Object.keys(this.state.filesDetails).map((index) => {
+                        let { name, size, progress, success } = this.state.filesDetails[index];
                         return (
-                            <li key={index} className="item-list-file">
-                                <span>{this.state.filesDetails[index].name}</span>
-                                <span className="delete-file" onClick={() => { this._deleteFile(index) }}>X</span>
+                            <li key={index} className="item-list-file" onClick={() => { this._deleteFile(index) }}>
+                                <span>{name}</span>
                                 <div>
-                                    <p>Tamaño: {(this.state.filesDetails[index].size / 1000).toFixed(2)} Kb.</p>
-                                    <span>Progress  {this.state.filesDetails[index].progress} %</span>
+                                    <p>Tamaño: {(size / 1000).toFixed(2)} Kb.</p>
                                     <div>
-                                        <a href={ this.state.filesDetails[index].success } >Success: { this.state.filesDetails[index].success }</a>
+                                        <a href={ success } >Success: { success }</a>
                                     </div>
                                 </div>
-                                <div className="progress-upload-file" style={ { width: this.state.filesDetails[index].progress + '%' } }></div>
+                                <div className="progress-upload-file" style={ { width: progress + '%' } }></div>
                             </li>
                         );
                     })}
