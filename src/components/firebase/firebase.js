@@ -23,12 +23,13 @@ const storageRef = storage.ref();
 
 
 const sendFiles = (files, cb) => {
-    console.log(files)
-    _executeSendFiles(files[0].src, cb);
-    
+    Object.keys(files).map( index => {
+        _executeSendFiles( files[index], index, cb);
+    })
 };
 
-const _executeSendFiles = (file, cb) => {
+const _executeSendFiles = (file, index, cb) => {
+    console.log("ARCHIVO F", file)
     var uploadTask = storageRef.child('images/' + file.name).put(file);
 
     // Register three observers:
@@ -39,22 +40,26 @@ const _executeSendFiles = (file, cb) => {
         // Observe state change events such as progress, pause, and resume
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        cb(0, progress);
+
+        console.log(' FILE: ' + index + '    Upload is ' + progress + '% done'); 
+        cb.loading( index, progress);
         switch (snapshot.state) {
             case firebase.storage.TaskState.PAUSED: // or 'paused'
-                console.log('Upload is paused');
+                //console.log('Upload is paused');
                 break;
             case firebase.storage.TaskState.RUNNING: // or 'running'
-                console.log('Upload is running');
+                //console.log('Upload is running');
                 break;
         }
     }, function (error) {
         // Handle unsuccessful uploads
+        cb.error( index, error );
     }, function () {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-            console.log('File available at', downloadURL);
+            //console.log('File available at', downloadURL);
+            cb.success( index, downloadURL );
         });
     });
 }
