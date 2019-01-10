@@ -3,18 +3,16 @@
 ul {
   margin-top: 50px; 
   li { 
-    list-style: none; position: relative;
+    list-style: none; position: relative; transition: box-shadow .3s ease; max-width: 200px; overflow: hidden;
     &.item-list-file { 
       padding: 15px; border: 1px solid gainsboro; margin-bottom: 10px; border-radius: 3px;
       display: inline-block; margin-left: 15px; font-size: 14px; cursor: pointer;
-      .delete-file { 
-        margin-left: 20px; background: #cc3a3a; color: white; line-height: 20px; width: 20px; display: inline-block; 
-        vertical-align: middle; border-radius: 50%; visibility: hidden; opacity: 0; transition: all .3s ease;
-      }
+      .file-name { width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; }
       &:hover .delete-file { visibility: visible; opacity: 1; }
     }
     .progress-upload-file {
       width: 0; height: 3px; background: green; position: absolute; left: 0; bottom: 0;
     }
+    &:hover { box-shadow: 0 2px 10px -3px tomato; }
   }
 }

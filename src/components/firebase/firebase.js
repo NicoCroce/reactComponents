@@ -23,13 +23,12 @@ const storageRef = storage.ref();
 
 
 const sendFiles = (files, cb) => {
-    Object.keys(files).map( index => {
-        _executeSendFiles( files[index], index, cb);
+    files.forEach( (file, index) => {
+        _executeSendFiles( file, index, cb);
     })
 };
 
 const _executeSendFiles = (file, index, cb) => {
-    console.log("ARCHIVO F", file)
     var uploadTask = storageRef.child('images/' + file.name).put(file);
 
     // Register three observers:
@@ -40,8 +39,6 @@ const _executeSendFiles = (file, index, cb) => {
         // Observe state change events such as progress, pause, and resume
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-
-        console.log(' FILE: ' + index + '    Upload is ' + progress + '% done'); 
         cb.loading( index, progress);
         switch (snapshot.state) {
             case firebase.storage.TaskState.PAUSED: // or 'paused'

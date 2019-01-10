@@ -9,12 +9,12 @@ class UploadFile extends Component {
         this.state = {
             filesDetails: []
         }
-        this.files = {};
+        this.files = [];
         this.formRef = React.createRef();
     }
 
     _filesChoosen = (files) => {
-        console.log(files);
+
         let listFiles = [];
 
         const file = {
@@ -29,7 +29,8 @@ class UploadFile extends Component {
             let { name, size } = e;
             listFiles.push({ ...file, ...{ name, size } });
         });
-        this.files = files;
+
+        this.files = Object.values(files); //Convert json to array.
 
         this.setState({
             filesDetails: listFiles
@@ -68,11 +69,13 @@ class UploadFile extends Component {
     }
 
     _deleteFile(index) {
-        delete this.files[index];
-        let newFiles = [...this.state.filesDetails]
+        let newFiles = [...this.files];
         newFiles.splice(index, 1);
+        this.files = newFiles;
+        let newFilesDetails = [...this.state.filesDetails];
+        newFilesDetails.splice(index, 1);
         this.setState({
-            filesDetails: newFiles
+            filesDetails: newFilesDetails
         });
     }
 
@@ -94,8 +97,8 @@ class UploadFile extends Component {
                     {Object.keys(this.state.filesDetails).map((index) => {
                         let { name, size, progress, success } = this.state.filesDetails[index];
                         return (
-                            <li key={index} className="item-list-file" onClick={() => { this._deleteFile(index) }}>
-                                <span>{name}</span>
+                            <li key={index} className="item-list-file" onClick={() => { this._deleteFile(index) }} title={ name }>
+                                <span className="file-name">{name}</span>
                                 <div>
                                     <p>Tamaño: {(size / 1000).toFixed(2)} Kb.</p>
                                     <div>
