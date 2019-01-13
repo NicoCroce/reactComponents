@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './upload-file.scss';
 import firebase from '../firebase/firebase';
+import '../icons/style.css';
 
 class UploadFile extends Component {
 
@@ -98,6 +99,7 @@ class UploadFile extends Component {
                         let { name, size, progress, success } = this.state.filesDetails[index];
                         return (
                             <li key={index} className="item-list-file" onClick={() => { this._deleteFile(index) }} title={ name }>
+                                <i className="icon-upload-file-text2"></i>
                                 <span className="file-name">{name}</span>
                                 <div>
                                     <p>Tamaño: {(size / 1000).toFixed(2)} Kb.</p>

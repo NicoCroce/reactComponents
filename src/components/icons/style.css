@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'uploadfile';
+  src:
+    url('fonts/uploadfile.ttf?56basq') format('truetype'),
+    url('fonts/uploadfile.woff?56basq') format('woff'),
+    url('fonts/uploadfile.svg?56basq#uploadfile') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-upload-"], [class*=" icon-upload-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'uploadfile' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-upload-file-text2:before {
+  content: "\e926";
+}
+.icon-upload-upload:before {
+  content: "\e961";
+}
+.icon-upload-cloud-upload:before {
+  content: "\e9c3";
+}
+.icon-upload-cloud-check:before {
+  content: "\e9c4";
+}
