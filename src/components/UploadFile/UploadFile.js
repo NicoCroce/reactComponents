@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './upload-file.scss';
 import firebase from '../firebase/firebase';
+import helper from '../helpers/helper';
+import './upload-file.scss';
 import '../icons/style.css';
 
 class UploadFile extends Component {
@@ -70,6 +71,8 @@ class UploadFile extends Component {
     }
 
     _deleteFile(index) {
+        if (this.state.filesDetails[index].progress != 0) return;
+
         let newFiles = [...this.files];
         newFiles.splice(index, 1);
         this.files = newFiles;
@@ -80,34 +83,59 @@ class UploadFile extends Component {
         });
     }
 
+    _getSize(size) {
+        return (size < 1000000) ? (size / 1000).toFixed(2) + " Kb" : (size / 1000000).toFixed(2) + " Mb"
+    }
+
+    _getIconFile(progress) {
+        return progress == 100 ? 'icon-upload-cloud-check' : 'icon-upload-file-text2';
+    }
+
+    _buttonUploadAction = () => {
+        if (this.state.filesDetails.length == 0) return;
+        return (
+            <div className="upload-action">
+                <label htmlFor="uploadFile" className="icon-upload-cloud-upload button-action"></label>
+                <input id="uploadFile" type="submit" value="" />
+            </div>
+        );
+    }
+
     render() {
         console.log("progress", this.state.filesDetails);
         return (
             <div>
-                <form onSubmit={(e) => this._submiteForm(e)} ref= { this.formRef }>
-                    <input
-                        type="file"
-                        id="uploadFile"
-                        name="upload"
-                        multiple="multiple"
-                        onChange={e => this._filesChoosen(e.target.files)}
-                    />
-                    <input type="submit" />
+                <form onSubmit={(e) => this._submiteForm(e)} ref={this.formRef}>
+                    <div className="upload-area">
+                        <input
+                            type="file"
+                            id="loadFile"
+                            name="upload"
+                            multiple="multiple"
+                            onChange={e => this._filesChoosen(e.target.files)}
+                        />
+                        <label htmlFor="loadFile" className="icon-upload-upload"></label>
+                        { this._buttonUploadAction() }
+                    </div>
                 </form>
-                <ul>
-                    {Object.keys(this.state.filesDetails).map((index) => {
-                        let { name, size, progress, success } = this.state.filesDetails[index];
+
+                <ul className="list-items-upload">
+                    {this.state.filesDetails.map((item, index) => {
+                        let { name, size, progress, success } = item;
                         return (
-                            <li key={index} className="item-list-file" onClick={() => { this._deleteFile(index) }} title={ name }>
-                                <i className="icon-upload-file-text2"></i>
-                                <span className="file-name">{name}</span>
-                                <div>
-                                    <p>Tamaño: {(size / 1000).toFixed(2)} Kb.</p>
-                                    <div>
-                                        <a href={ success } >Success: { success }</a>
-                                    </div>
+                            <li key={index} 
+                                className={'item-list-file ' + helper.class({ 'loading': progress != 0 })} 
+                                onClick={() => { this._deleteFile(index) }} 
+                                title={name}>
+                                <i className={this._getIconFile(progress)}></i>
+                                <div className="detail-file">
+                                    <span className="file-name">{name}</span>
+                                    <span className="size-file"> {this._getSize(size)} </span>
                                 </div>
-                                <div className="progress-upload-file" style={ { width: progress + '%' } }></div>
+                                {/* <div>
+                                    <a href={success} >Success: {success}</a>
+                                </div> */}
+                                <div className="progress-upload-file" style={{ width: progress + '%' }}></div>
                             </li>
                         );
                     })}
