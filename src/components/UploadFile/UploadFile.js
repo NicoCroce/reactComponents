@@ -5,8 +5,26 @@ import Dropzone from 'react-dropzone'
 import './upload-file.scss';
 import '../icons/style.css';
 
-class UploadFile extends Component {
+/**
+ * @prop {function} response - Return all items when these are loaded in firebase.
+ * @this { array } state.filesDetails - Contain all items with details.
+ * @this { array } files - Contain all source files selected.
+ * @this { function }  _onDrop - It runs when files are uploaded with drag and drop.
+ * @this { function }  _filesChoosen - It runs as a callback when upload files or drag and drop them.
+ * @this { function }  _sendFiles - Send files to firebase class.
+ * @this { function }  _error - It run as a callback when firebase generate an error.
+ * @this { function }  _success - It run as a callback when firebase generate a success.
+ * @this { function }  _showProgress - It run as a callback when firebase dens a progress upload file.
+ * @this { function }  _deleteFile - It run when delete a file.
+ * @this { function }  _getSize - Return size file.
+ * @this { function }  _getIconFile - Return icons according to params.
+ * @this { function }  _buttonUploadAction - Return an HTML block concerning to files upload  button.
+ * @this { function }  UploadForm - 
+ * @this { function }  render - 
+ */
 
+class UploadFile extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -14,9 +32,8 @@ class UploadFile extends Component {
         }
         this.files = [];
     }
-
-    onDrop = (acceptedFiles, rejectedFiles) => {
-        // Do something with files
+    
+    _onDrop = (acceptedFiles, rejectedFiles) => {
         this._filesChoosen(acceptedFiles);
     }
 
@@ -64,6 +81,7 @@ class UploadFile extends Component {
         let newState = [...this.state.filesDetails];
         newState[index].success = res;
         this.setState({ newState });
+        this.props.response(newState[index]);
     }
 
     _showProgress = (index, progress) => {
@@ -121,7 +139,7 @@ class UploadFile extends Component {
         return (
             <div>
 
-                <Dropzone onDrop={this.onDrop}>
+                <Dropzone onDrop={this._onDrop}>
                     {({ getRootProps, getInputProps, isDragActive }) => {
                         return (
                             <div
@@ -153,9 +171,6 @@ class UploadFile extends Component {
                                     <span className="file-name">{name}</span>
                                     <span className="size-file"> {this._getSize(size)} </span>
                                 </div>
-                                {/* <div>
-                                    <a href={success} >Success: {success}</a>
-                                </div> */}
                                 <div className="progress-upload-file" style={{ width: progress + '%' }}></div>
                             </li>
                         );
