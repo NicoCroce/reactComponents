@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import firebase from '../firebase/firebase';
-import helper from '../helpers/helper';
+import Firebase from '../firebase/firebase';
+import Helper from '../helpers/helper';
+import Dropzone from 'react-dropzone'
 import './upload-file.scss';
 import '../icons/style.css';
 
@@ -12,7 +13,11 @@ class UploadFile extends Component {
             filesDetails: []
         }
         this.files = [];
-        this.formRef = React.createRef();
+    }
+
+    onDrop = (acceptedFiles, rejectedFiles) => {
+        // Do something with files
+        this._filesChoosen(acceptedFiles);
     }
 
     _filesChoosen = (files) => {
@@ -37,17 +42,16 @@ class UploadFile extends Component {
         this.setState({
             filesDetails: listFiles
         });
-        this.formRef.current.reset();
     }
 
-    _submiteForm(event) {
+    _sendFiles(event) {
         event.preventDefault();
         const cb = {
             loading: this._showProgress.bind(this),
             error: this._error.bind(this),
             success: this._success.bind(this)
         }
-        firebase.sendFiles(this.files, cb);
+        Firebase.sendFiles(this.files, cb);
     }
 
     _error = (index, err) => {
@@ -95,37 +99,54 @@ class UploadFile extends Component {
         if (this.state.filesDetails.length == 0) return;
         return (
             <div className="upload-action">
-                <label htmlFor="uploadFile" className="icon-upload-cloud-upload button-action"></label>
-                <input id="uploadFile" type="submit" value="" />
+                <span 
+                    className="icon-upload-cloud-upload button-action"
+                    onClick={(e) => { this._sendFiles(e) }}
+                ></span>
             </div>
         );
     }
 
+    UploadForm = () => (
+        <div className="mgt-40">
+            <span htmlFor="loadFile" className="icon-upload-upload"></span>
+            {this._buttonUploadAction()}
+        </div>
+    );
+
     render() {
         console.log("progress", this.state.filesDetails);
+        const { UploadForm } = this;
+
         return (
             <div>
-                <form onSubmit={(e) => this._submiteForm(e)} ref={this.formRef}>
-                    <div className="upload-area">
-                        <input
-                            type="file"
-                            id="loadFile"
-                            name="upload"
-                            multiple="multiple"
-                            onChange={e => this._filesChoosen(e.target.files)}
-                        />
-                        <label htmlFor="loadFile" className="icon-upload-upload"></label>
-                        { this._buttonUploadAction() }
-                    </div>
-                </form>
+
+                <Dropzone onDrop={this.onDrop}>
+                    {({ getRootProps, getInputProps, isDragActive }) => {
+                        return (
+                            <div
+                                {...getRootProps()}
+                                className={'upload-area ' + Helper.class({ 'dropzone--isActive': isDragActive })}
+                            >
+                                <input {...getInputProps()} />
+                                {
+                                    isDragActive ?
+                                        <p>Drop files here...</p> :
+                                        <p>Try dropping some files here, or click to select files to upload.</p>
+                                }
+                                <UploadForm />
+                            </div>
+                        )
+                    }}
+                </Dropzone>
 
                 <ul className="list-items-upload">
                     {this.state.filesDetails.map((item, index) => {
                         let { name, size, progress, success } = item;
                         return (
-                            <li key={index} 
-                                className={'item-list-file ' + helper.class({ 'loading': progress != 0 })} 
-                                onClick={() => { this._deleteFile(index) }} 
+                            <li key={index}
+                                className={'item-list-file ' + Helper.class({ 'loading': progress != 0 })}
+                                onClick={() => { this._deleteFile(index) }}
                                 title={name}>
                                 <i className={this._getIconFile(progress)}></i>
                                 <div className="detail-file">
