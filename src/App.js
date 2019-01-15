@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './App.scss';
 import UploadFile from './components/UploadFile/UploadFile';
+import Firebase from './components/firebase/firebase';
+import './App.scss';
 import './components/firebase/firebase'; 
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
         <img src="" alt=""/>
         <UploadFile 
           response= { this._showFile }
+          connection= { Firebase }
         />
       </div>
     );

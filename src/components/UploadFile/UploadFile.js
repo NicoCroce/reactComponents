@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import Firebase from '../firebase/firebase';
 import Helper from '../helpers/helper';
 import Dropzone from 'react-dropzone'
 import './upload-file.scss';
 import '../icons/style.css';
 
 /**
- * @prop {function} response - Return all items when these are loaded in firebase.
- * @this { array } state.filesDetails - Contain all items with details.
- * @this { array } files - Contain all source files selected.
+ * @prop { function } response - Return all items when these are loaded in firebase.
+ * @prop { class } connection - Connection file. This must include sendFiles function.
+ * @class { array } state.filesDetails - Contain all items with details.
+ * @class { array } files - Contain all source files selected.
  * @this { function }  _onDrop - It runs when files are uploaded with drag and drop.
  * @this { function }  _filesChoosen - It runs as a callback when upload files or drag and drop them.
  * @this { function }  _sendFiles - Send files to firebase class.
@@ -20,7 +20,6 @@ import '../icons/style.css';
  * @this { function }  _getIconFile - Return icons according to params.
  * @this { function }  _buttonUploadAction - Return an HTML block concerning to files upload  button.
  * @this { function }  UploadForm - 
- * @this { function }  render - 
  */
 
 class UploadFile extends Component {
@@ -31,6 +30,7 @@ class UploadFile extends Component {
             filesDetails: []
         }
         this.files = [];
+        this.connection = props.connection;
     }
     
     _onDrop = (acceptedFiles, rejectedFiles) => {
@@ -68,7 +68,7 @@ class UploadFile extends Component {
             error: this._error.bind(this),
             success: this._success.bind(this)
         }
-        Firebase.sendFiles(this.files, cb);
+        this.connection.sendFiles(this.files, cb);
     }
 
     _error = (index, err) => {
