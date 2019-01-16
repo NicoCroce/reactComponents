@@ -7,6 +7,8 @@ import '../icons/style.css';
 /**
  * @prop { function } response - Return all items when these are loaded in firebase.
  * @prop { class } connection - Connection file. This must include sendFiles function.
+ * @prop { class } textOnDropEvent - Text used while the files are being dragged.
+ * @prop { class } textOutDropFile - Text used while don't the files are being dragged.
  * @class { array } state.filesDetails - Contain all items with details.
  * @class { array } files - Contain all source files selected.
  * @this { function }  _onDrop - It runs when files are uploaded with drag and drop.
@@ -31,6 +33,8 @@ class UploadFile extends Component {
         }
         this.files = [];
         this.connection = props.connection;
+        this.textOnDropEvent = props.textOnDropEvent;
+        this.textOutDropFile = props.textOutDropFile;
     }
     
     _onDrop = (acceptedFiles, rejectedFiles) => {
@@ -147,11 +151,8 @@ class UploadFile extends Component {
                                 className={'upload-area ' + Helper.class({ 'dropzone--isActive': isDragActive })}
                             >
                                 <input {...getInputProps()} />
-                                {
-                                    isDragActive ?
-                                        <p>Drop files here...</p> :
-                                        <p>Try dropping some files here, or click to select files to upload.</p>
-                                }
+                                { isDragActive ? <p>{ this.textOnDropEvent }</p> : <p>{ this.textOutDropFile }</p> }
+                                
                                 <UploadForm />
                             </div>
                         )

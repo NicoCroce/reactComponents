@@ -16,6 +16,8 @@ class App extends Component {
         <UploadFile 
           response= { this._showFile }
           connection= { Firebase }
+          textOnDropEvent="Deja los archivos aquí..."
+          textOutDropFile="Arrastra los archivos o selecciona los mismos"
         />
       </div>
     );
