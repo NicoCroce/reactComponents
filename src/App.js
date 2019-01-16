@@ -15,7 +15,7 @@ class App extends Component {
         <img src="" alt=""/>
         <UploadFile 
           response= { this._showFile }
-          connection= { Firebase }
+          loadFilesAction= { Firebase.sendFiles }
           textOnDropEvent="Deja los archivos aquí..."
           textOutDropFile="Arrastra los archivos o selecciona los mismos"
         />

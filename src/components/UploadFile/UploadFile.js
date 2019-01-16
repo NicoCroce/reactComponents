@@ -6,7 +6,7 @@ import '../icons/style.css';
 
 /**
  * @prop { function } response - Return all items when these are loaded in firebase.
- * @prop { class } connection - Connection file. This must include sendFiles function.
+ * @prop { class } loadFilesAction - Send files to firebase.
  * @prop { class } textOnDropEvent - Text used while the files are being dragged.
  * @prop { class } textOutDropFile - Text used while don't the files are being dragged.
  * @class { array } state.filesDetails - Contain all items with details.
@@ -32,7 +32,8 @@ class UploadFile extends Component {
             filesDetails: []
         }
         this.files = [];
-        this.connection = props.connection;
+
+        this.loadFilesAction = props.loadFilesAction;
         this.textOnDropEvent = props.textOnDropEvent;
         this.textOutDropFile = props.textOutDropFile;
     }
@@ -72,7 +73,7 @@ class UploadFile extends Component {
             error: this._error.bind(this),
             success: this._success.bind(this)
         }
-        this.connection.sendFiles(this.files, cb);
+        this.loadFilesAction(this.files, cb);
     }
 
     _error = (index, err) => {
