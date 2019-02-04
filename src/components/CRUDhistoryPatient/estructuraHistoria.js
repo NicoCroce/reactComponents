@@ -10,12 +10,16 @@ const historyResponse = () => {
             "city": "Rosario",
             "date": "Fri Feb 01 2019 12:35:14 GMT-0300 (hora estándar de Argentina)",
             "professional": "Diego Benincasa",
-            "antecedentes": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae assumenda perspiciatis doloremque est quis eius dolores esse officiis dolorum minus odio autem nulla tempora quae, modi similique dolor eaque cum?",
-            "motivo": "",
-            "semiologia": "",
-            "fondoDeOjo": "",
-            "examenesComplementarios": "",
-            "practicas": "",
+            "details": {
+                "antecedentes": "ANTECEDENTES Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae assumenda perspiciatis doloremque est quis eius dolores esse officiis dolorum minus odio autem nulla tempora quae, modi similique dolor eaque cum?",
+                "motivo": "MOTIVO Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae assumenda perspiciatis doloremque est quis eius dolores esse officiis dolorum minus odio autem nulla tempora quae, modi similique dolor eaque cum?",
+                "semiología": "SEMIOLOGÍA Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae assumenda perspiciatis doloremque est quis eius dolores esse officiis dolorum minus odio autem nulla tempora quae, modi similique dolor eaque cum?",
+                "fondoDeOjo": "FONDO DE OJO Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae assumenda perspiciatis doloremque est quis eius dolores esse officiis dolorum minus odio autem nulla tempora quae, modi similique dolor eaque cum?",
+                "examenesComplementarios": "EXÁMENES Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae assumenda perspiciatis doloremque est quis eius dolores esse officiis dolorum minus odio autem nulla tempora quae, modi similique dolor eaque cum?",
+                "practicas": "PRÁCTICAS Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae assumenda perspiciatis doloremque est quis eius dolores esse officiis dolorum minus odio autem nulla tempora quae, modi similique dolor eaque cum?",
+                "biomicroscopia": "BIOMICROSCOPIA Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae assumenda perspiciatis doloremque est quis eius dolores esse officiis dolorum minus odio autem nulla tempora quae, modi similique dolor eaque cum?",
+                "rp": "RP Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae assumenda perspiciatis doloremque est quis eius dolores esse officiis dolorum minus odio autem nulla tempora quae, modi similique dolor eaque cum?"
+            },
             "agudezaVisual": {
                 "od": {
                     "esf": 0.00,
@@ -23,7 +27,7 @@ const historyResponse = () => {
                     "eje": 0,
                     "cc": "",
                     "sc": ""
-                }, 
+                },
                 "oi": {
                     "esf": 0.00,
                     "cil": 0.00,
@@ -33,13 +37,11 @@ const historyResponse = () => {
                 }
             },
             "agudezaVisualCerca": "",
-            "biomicroscopia": "",
             "presion": {
                 "od": 0,
                 "oi": 0,
                 "hour": "15:30"
-            },
-            "rp": ""
+            }
         }
     )
 }

@@ -36,12 +36,15 @@ li { list-style: none; }
                     }
                 }
             }
-            /* .patient-age { margin-bottom: 30px; font-size: 14px; margin-top: 5px; font-weight: 500; color: #626262; } */
-            .description-block {
-                margin-bottom: 25px;
-                h2 { font-size: 14px; text-transform: uppercase; }
-                p { padding-left: 40px; padding-top: 5px; font-size: 13px; line-height: 25px; }
+            .history-detail {
+                display: flex; flex-flow: row wrap;
+                .description-block {
+                    margin: 10px; padding: 15px; margin-bottom: 25px;     width: calc(50% - 20px); float: left; box-shadow: 0 2px 15px -6px black;
+                    h2 { font-size: 14px; text-transform: uppercase; }
+                    p { margin-top: 5px; font-size: 13px; line-height: 25px; }
+                }
             }
+            /* .patient-age { margin-bottom: 30px; font-size: 14px; margin-top: 5px; font-weight: 500; color: #626262; } */
             .files-appoitments {
                 display: flex; flex: 0 1 auto; flex-flow: row wrap; justify-content: space-between; width: 100%;
                 img {

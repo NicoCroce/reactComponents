@@ -23,7 +23,19 @@ let literalDate = (date) => {
     }
 }
 
+const isFunction = (e) => typeof (e) == "function";
+const isEmpty = (e) => e == null || e == undefined || e == "" || e.length == 0 ? true : false;
+const isObject = (e) => typeof (e) == "object";
+
+const isValue = (element) =>
+    isFunction(element) ? true : // verifico si es una funcion
+        isEmpty(element) ? false : // verifico si existe y no esta vacio
+            isObject(element) && element.size == undefined && JSON.stringify(element) === '{}' ? false : // verifico si es objeto y si es Map
+                element.size == 0 ? false : // si es map que sea mayor a 0
+                    true;
+
 export default {
     class: UiClass,
-    literalDate
+    literalDate,
+    isValue
 }
