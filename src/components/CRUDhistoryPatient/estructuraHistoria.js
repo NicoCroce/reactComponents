@@ -36,7 +36,7 @@ const historyResponse = () => {
                     "sc": ""
                 }
             },
-            "agudezaVisualCerca": "",
+            "agudezaVisualCerca": 1,
             "presion": {
                 "od": 0,
                 "oi": 0,

@@ -45,6 +45,60 @@ class CRUDhistoryPatient extends Component {
                                     </div>
                                 ))}
                             </div>
+                            <div className="block-flex">
+                                <div className="block-table">
+                                    <table className="has-aside">
+                                        <caption>Agudeza Visual</caption>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                {Object.keys(agudezaVisual.od).map(label => (
+                                                    <th>{label}</th>
+                                                ))}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>OD</td>
+                                                {Object.keys(agudezaVisual.od).map(data => (
+                                                    <td>{agudezaVisual.od[data]}</td>
+                                                ))}
+                                            </tr>
+                                            <tr>
+                                                <td>OI</td>
+                                                {Object.keys(agudezaVisual.oi).map(data => (
+                                                    <td>{agudezaVisual.oi[data]}</td>
+                                                ))}
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="1">Cerca</th>
+                                                <td colspan="5">{ agudezaVisualCerca }</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div className="block-table">
+                                    <table>
+                                        <caption>Presión</caption>
+                                        <thead>
+                                            <tr>
+                                                {Object.keys(presion).map(label => (
+                                                    <th>{label}</th>
+                                                ))}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                {Object.keys(presion).map(data => (
+                                                    <td>{presion[data]}</td>
+                                                ))}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             <div className="files-appoitments">
                                 <img src="https://getuikit.com/v2/docs/images/placeholder_600x400.svg" alt="" />
                                 <img src="https://getuikit.com/v2/docs/images/placeholder_600x400.svg" alt="" />

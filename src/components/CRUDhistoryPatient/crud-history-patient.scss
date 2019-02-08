@@ -2,6 +2,13 @@ li { list-style: none; }
 
 #CRUDhistoryPatient {
     text-align: left;
+
+    .description-block {
+        margin: 10px; padding: 15px; margin-bottom: 25px;     width: calc(50% - 20px); float: left; box-shadow: 0 2px 15px -6px black;
+        h2 { font-size: 14px; text-transform: uppercase; }
+        p { margin-top: 5px; font-size: 13px; line-height: 25px; }
+    }
+
     .patient-name { margin-bottom: 25px; border-bottom: 1px solid; padding-bottom: 10px; }
     .year-block{
         position: relative; margin: 0 30px; padding-bottom: 20px;
@@ -38,10 +45,24 @@ li { list-style: none; }
             }
             .history-detail {
                 display: flex; flex-flow: row wrap;
-                .description-block {
-                    margin: 10px; padding: 15px; margin-bottom: 25px;     width: calc(50% - 20px); float: left; box-shadow: 0 2px 15px -6px black;
-                    h2 { font-size: 14px; text-transform: uppercase; }
-                    p { margin-top: 5px; font-size: 13px; line-height: 25px; }
+            }
+            .block-flex { display: flex; flex-flow: row wrap; }
+            .block-table {
+                width: 50%; margin-bottom: 50px; font-size: 14px; padding-right: 20px;
+                table { 
+                    width: 100%; text-align: center; border-collapse: collapse; border-bottom: 1px solid #dcdcdc;
+                    border-right: 1px solid #dcdcdc;
+                    caption { font-size: 12px; margin-bottom: 5px; }
+                    td:first-child { text-transform: uppercase; font-weight: 700; font-size: 12px; }
+                    thead { text-transform: uppercase; font-size: 12px; }
+                    th, td { padding: 10px; }
+                    th { background: #dcdcdc; }
+                    tbody tr { border-bottom: 1px solid #dcdcdc; }
+                    &.has-aside {
+                        thead th:first-child  { background: transparent; }
+                        td:first-child { background: #dcdcdc; }
+                        th { background: #dcdcdc; text-transform: uppercase; font-weight: 500; }
+                    }
                 }
             }
             /* .patient-age { margin-bottom: 30px; font-size: 14px; margin-top: 5px; font-weight: 500; color: #626262; } */
