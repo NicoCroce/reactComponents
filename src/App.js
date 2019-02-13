@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import UploadFile from './components/UploadFile/UploadFile';
 import CRUDhistoryPatient from './components/CRUDhistoryPatient/CRUDhistoryPatient';
 import Firebase from './components/firebase/firebase';
-import './App.scss';
+import CardTemplateOne from './components/cards/CardTemplateOne/CardTemplateOne';
+
+/* import './App.scss'; */
 import './components/firebase/firebase'; 
 
 class App extends Component {
@@ -29,7 +31,11 @@ class App extends Component {
           textOutDropFile="Arrastra los archivos o selecciona los mismos"
         /> */}
 
-        <CRUDhistoryPatient patient={this.patient}/>
+        {/* <CRUDhistoryPatient patient={this.patient}/> */}
+
+        <CardTemplateOne />
+
+
 
 
       </div>

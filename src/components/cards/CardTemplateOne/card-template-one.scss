@@ -1,0 +1,57 @@
+$COLOR-HEADER-CARD: #ffa35c;
+$COLOR-BANNER-PRICE:#ff2600;
+
+body { font-family: sans-serif; }
+
+#CardTemplateOne { 
+  width: 16cm;   margin: 0 auto; border: 1px solid #c5c5c5;
+  header { 
+    text-align: center; text-transform: uppercase;
+    h1 { background-color: $COLOR-HEADER-CARD; color: white; padding: 15px; font-size: 50px; }
+    h2 { padding: 20px; font-size: 30px; }
+  }
+  body {
+    padding: 0 20px;
+    .center-body { 
+      display: table; width: 100%;
+      .body-details, .body-price { display:table-cell; vertical-align: middle; }
+      .body-details {
+        text-transform: uppercase; text-align: center; position: relative; top: 5px;
+        span { 
+          display: block;
+          &:not(.now-detail) { font-size: 14px; }
+          &.now-detail { font-weight: bold; font-size: 20px;  }
+        }
+      }
+      .body-price { 
+        font-size: 100px; font-weight: bold; margin-left: 20px; text-align: right;
+        span { vertical-align: middle; }
+        .symbol-card { font-size: 65px; }
+      }
+    }
+    .body-other-info { 
+      font-weight: bold; font-size: 20px; text-transform: uppercase;
+      span { vertical-align: middle; }
+      .symbol-other-info { margin-left: 35px; margin-right: 10px; font-size: 35px; }
+      .price-other-info { text-decoration: line-through; }
+    }
+  }
+  footer {
+    margin-top: 30px;
+    .details-columns-footer {
+      text-transform: uppercase; text-align: center; display: flex; flex-flow: row nowrap; 
+      justify-content: space-between; padding: 0 20px; font-weight: bold;
+      >span {  }
+    }
+    .banner-price {
+      background-color: $COLOR-BANNER-PRICE; text-align: center; text-transform: uppercase; font-weight: bold;
+      margin-top: 30px;
+      img, p { display: inline-block; vertical-align: middle; }
+      p { 
+        color: white; line-height: 2; font-size: 25px;
+        span { color: yellow; }
+      }
+    }
+  }
+
+}
