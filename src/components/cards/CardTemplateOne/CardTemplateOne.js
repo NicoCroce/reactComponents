@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import CardHeader from '../CardHeader/CardHeader';
+import CardBody from '../CardBody/CardBody';
+import CardFooter from'../CardFooter/CardFooter';
 
 import Helper from '../../helpers/helper';
 
@@ -10,7 +12,30 @@ class CardTemplateOne extends Component {
   constructor(props) {
     super(props);
     this.state = {
+    }
+  }
 
+  getBodyConfig = () => {
+    return {
+      aside: {
+        detailOne: "",
+        detailTwo: "precio",
+        detailThree: "contado"
+      },
+      price: "888.888",
+      priceTwo: "8.888"
+    }
+  }
+
+  getFooterConfig = () => {
+    return {
+      date: {
+        day: "31",
+        month: "12",
+        year: "2000"
+      },
+      sap: "Algo Sap",
+      origin: "China"
     }
   }
 
@@ -19,36 +44,9 @@ class CardTemplateOne extends Component {
     /* const { dateDay, dateYear, literalMont, hour, minutes } = Helper.literalDate(date); */
     return (
       <article id="CardTemplateOne">
-        <CardHeader title="Oferta Especial" description="descripción producto"/>
-        <body>
-          <div className="center-body">
-            <div className="body-details">
-              <span className="now-detail">ahora</span>
-              <span>precio</span>
-              <span>contado</span>
-            </div>
-            <div className="body-price">
-              <span className="symbol-card">$</span>
-              <span>XXX.XXX</span>
-            </div>
-          </div>
-          <div className="body-other-info">
-            <span>antes</span>
-            <span className="symbol-other-info">$</span>
-            <span className="price-other-info">X.XXX</span>
-          </div>
-        </body>
-        <footer>
-          <div className="details-columns-footer">
-            <span>xx/xxx/xxxx</span>
-            <span>SAP: <span>xxxxxxx</span></span>
-            <span>origen: <span>xxxxxxxx</span></span>
-          </div>
-          <div className="banner-price">
-            <img src="" alt=""/>
-            <p>el mejor precio <span>asegurado</span></p>
-          </div>
-        </footer>
+        <CardHeader title="Oferta Especial" description="descripción producto"  algo="descripción producto"/>
+        <CardBody config={ this.getBodyConfig() }/>
+        <CardFooter config={ this.getFooterConfig() }/>
 
       </article>
     );

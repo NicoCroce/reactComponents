@@ -3,6 +3,10 @@ $COLOR-BANNER-PRICE:#ff2600;
 
 body { font-family: sans-serif; }
 
+.error-card-data {
+  &:after { content: "falta   " attr(data); display: inline-block; background: #ff00e2; padding: 5px 10px; font-size: 10px; color: white; border: 2px solid #890f0f; }
+}
+
 #CardTemplateOne { 
   width: 16cm;   margin: 0 auto; border: 1px solid #c5c5c5;
   header { 
@@ -10,7 +14,7 @@ body { font-family: sans-serif; }
     h1 { background-color: $COLOR-HEADER-CARD; color: white; padding: 15px; font-size: 50px; }
     h2 { padding: 20px; font-size: 30px; }
   }
-  body {
+  section {
     padding: 0 20px;
     .center-body { 
       display: table; width: 100%;
@@ -24,16 +28,16 @@ body { font-family: sans-serif; }
         }
       }
       .body-price { 
-        font-size: 100px; font-weight: bold; margin-left: 20px; text-align: right;
+        font-size: 120px; font-weight: bold; margin-left: 20px; text-align: right;
         span { vertical-align: middle; }
         .symbol-card { font-size: 65px; }
       }
     }
     .body-other-info { 
-      font-weight: bold; font-size: 20px; text-transform: uppercase;
+      font-weight: bold; font-size: 20px; text-transform: uppercase; 
       span { vertical-align: middle; }
-      .symbol-other-info { margin-left: 35px; margin-right: 10px; font-size: 35px; }
-      .price-other-info { text-decoration: line-through; }
+      .symbol-other-info { margin-left: 32px; margin-right: 10px; font-size: 35px; }
+      .price-other-info { text-decoration: line-through; font-size: 28px; }
     }
   }
   footer {
@@ -41,7 +45,6 @@ body { font-family: sans-serif; }
     .details-columns-footer {
       text-transform: uppercase; text-align: center; display: flex; flex-flow: row nowrap; 
       justify-content: space-between; padding: 0 20px; font-weight: bold;
-      >span {  }
     }
     .banner-price {
       background-color: $COLOR-BANNER-PRICE; text-align: center; text-transform: uppercase; font-weight: bold;
