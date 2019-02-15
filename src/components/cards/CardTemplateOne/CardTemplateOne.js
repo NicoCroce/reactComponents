@@ -18,12 +18,12 @@ class CardTemplateOne extends Component {
   getBodyConfig = () => {
     return {
       aside: {
-        detailOne: "",
+        detailOne: "ahora",
         detailTwo: "precio",
         detailThree: "contado"
       },
       price: "888.888",
-      priceTwo: "8.888"
+      secondPrice: "8.888"
     }
   }
 
