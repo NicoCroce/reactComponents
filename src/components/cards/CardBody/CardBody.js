@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Helper from '../../helpers/helper';
-
+import InputCard from '../../InputCard/InputCard';
 
 class CardBody extends Component {
   constructor(props) {
@@ -9,7 +9,6 @@ class CardBody extends Component {
       mainPrice: this.props.config.price,
       secondPrice: this.props.config.secondPrice,
     }
-
   }
 
   _onTodoChange(value) {
@@ -29,11 +28,11 @@ class CardBody extends Component {
           </div>
           <div className="body-price">
             <span className="symbol-card">$</span>
-            <span className={Helper.class({ 'error-card-data': !this.state.mainPrice })}>
-              <input
-                type="text"
-                value={this.state.mainPrice}
-                onChange={e => this._onTodoChange(e.target.value)}
+            <span className={`main-price-input ${Helper.class({ 'error-card-data': !this.state.mainPrice })}`}>
+              <InputCard 
+              type="tel" 
+              initialValue={ this.state.mainPrice } 
+              value={ (val) => { this.setState({ mainPrice: val })} }              
               />
             </span>
           </div>
@@ -41,7 +40,13 @@ class CardBody extends Component {
         <div className="body-other-info">
           <span>antes</span>
           <span className="symbol-other-info">$</span>
-          <span className={`price-other-info ${Helper.class({ 'error-card-data': !this.state.secondPrice })}`}>{this.state.secondPrice}</span>
+          <span className={`price-other-info ${Helper.class({ 'error-card-data': !this.state.secondPrice })}`}>
+          <InputCard 
+            type="tel"
+            initialValue={ this.state.secondPrice }
+            value= { (val) => { this.setState({ secondPrice: val }) } }
+          />
+          </span>
         </div>
       </section>
     )
