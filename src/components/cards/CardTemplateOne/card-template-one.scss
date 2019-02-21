@@ -3,14 +3,16 @@ $COLOR-BANNER-PRICE:#ff2600;
 
 body { font-family: sans-serif; }
 
-input { font-size: inherit; display: inline-block; width: inherit; font-weight: inherit; }
+input { font-size: inherit; display: inline-block; width: inherit; font-weight: inherit; text-align: inherit; }
+.w2ch { width: 2ch; }
+.w4ch { width: 4ch; }
 
 .error-card-data {
   &:after { content: "falta   " attr(data); display: inline-block; background: #ff00e2; padding: 5px 10px; font-size: 10px; color: white; border: 2px solid #890f0f; }
 }
 
 #CardTemplateOne { 
-  width: 16cm;   margin: 0 auto; border: 1px solid #c5c5c5;
+  width: 17cm;   margin: 0 auto; border: 1px solid #c5c5c5;
   header { 
     text-align: center; text-transform: uppercase;
     h1 { background-color: $COLOR-HEADER-CARD; color: white; padding: 15px; font-size: 50px; }
@@ -30,7 +32,7 @@ input { font-size: inherit; display: inline-block; width: inherit; font-weight: 
         }
       }
       .body-price { 
-        font-size: 120px; font-weight: bold; margin-left: 20px; text-align: right;
+        font-size: 120px; font-weight: bold; margin-left: 20px; text-align: center;
         .main-price-input { width: 7ch; }
         span { vertical-align: middle; }
         .symbol-card { font-size: 65px; }
@@ -48,6 +50,8 @@ input { font-size: inherit; display: inline-block; width: inherit; font-weight: 
     .details-columns-footer {
       text-transform: uppercase; text-align: center; display: flex; flex-flow: row nowrap; 
       justify-content: space-between; padding: 0 20px; font-weight: bold;
+      >span >span { padding: 0 4px; }
+      .sap { width: 15ch; text-align: left; }
     }
     .banner-price {
       background-color: $COLOR-BANNER-PRICE; text-align: center; text-transform: uppercase; font-weight: bold;
