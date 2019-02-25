@@ -29,23 +29,25 @@ class CardBody extends Component {
           <div className="body-price">
             <span className="symbol-card">$</span>
             <span className={`main-price-input ${Helper.class({ 'error-card-data': !this.state.mainPrice })}`}>
-              <InputCard 
-              type="tel" 
-              initialValue={ this.state.mainPrice } 
-              value={ (val) => { this.setState({ mainPrice: val })} }              
+              <InputCard
+                type="tel"
+                initialValue={this.state.mainPrice}
+                value={(val) => { this.setState({ mainPrice: val }) }}
               />
             </span>
           </div>
         </div>
         <div className="body-other-info">
-          <span>antes</span>
-          <span className="symbol-other-info">$</span>
-          <span className={`price-other-info ${Helper.class({ 'error-card-data': !this.state.secondPrice })}`}>
-          <InputCard 
-            type="tel"
-            initialValue={ this.state.secondPrice }
-            value= { (val) => { this.setState({ secondPrice: val }) } }
-          />
+          <span className="other-info-text">antes</span>
+          <span className="other-info-value">
+            <span className="symbol-other-info">$</span>
+            <span className={`price-other-info ${Helper.class({ 'error-card-data': !this.state.secondPrice })}`}>
+              <InputCard
+                type="tel"
+                initialValue={this.state.secondPrice}
+                value={(val) => { this.setState({ secondPrice: val }) }}
+              />
+            </span>
           </span>
         </div>
       </section>

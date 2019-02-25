@@ -53,7 +53,8 @@ const CardFooter = (props) => {
           <span>
             <InputCard 
               type="text"
-              
+              initialValue={ origin }
+              value={ (val) => origin = val }
             />
           </span>
         </span>

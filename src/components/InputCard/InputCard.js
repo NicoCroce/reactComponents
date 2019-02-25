@@ -4,7 +4,7 @@ class InputCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.initialValue
+      value: props.initialValue || ""
     }
     this.sendValue = props.value;
     this.width = props.width;
